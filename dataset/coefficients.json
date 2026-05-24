@@ -1,0 +1,39 @@
+{
+  "description": "Coefficients par matière et par classe — Système éducatif béninois (MENB)",
+  "note": "Plus le coefficient est élevé, plus la matière est prioritaire pour le dataset",
+  "classes": {
+    "3eme": {
+      "Anglais": 02,
+      "Histoire-Geographie": 02,
+      "Mathematiques": 03,
+      "PCT": 02,
+      "SVT": 02
+    },
+    "Terminale_A": {
+      "Anglais": 03,
+      "Histoire-Geographie": 03,
+      "Mathematiques": 02,
+      "SVT": 02
+    },
+    "Terminale_B": {
+      "Anglais": 02,
+      "Histoire-Geographie": 03,
+      "Mathematiques": 02,
+      "SVT": 02
+    },
+    "Terminale_C": {
+      "Anglais": 02,
+      "Histoire-Geographie": 02,
+      "Mathematiques": 06,
+      "PCT": 05,
+      "SVT": 03
+    },
+    "Terminale_D": {
+      "Anglais": 02,
+      "Histoire-Geographie": 02,
+      "Mathematiques": 04,
+      "PCT": 04,
+      "SVT": 05
+    }
+  }
+}
