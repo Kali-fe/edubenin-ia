@@ -3,17 +3,14 @@ import os
 
 
 def get_colab_url():
-    return os.getenv("COLAB_NGROK_URL", "")
+    return os.getenv("COLAB_NGROK_URL", "").strip()
 
 
 def load_prompt(filename: str) -> str:
     base_dir = os.path.dirname(
         os.path.dirname(os.path.dirname(__file__))
     )
-    import os as _os
-    filepath = _os.path.join(
-        base_dir, "prompts", filename
-    )
+    filepath = os.path.join(base_dir, "prompts", filename)
     with open(filepath, "r", encoding="utf-8") as f:
         return f.read()
 
@@ -34,24 +31,27 @@ def chat_avec_modele(
     if not colab_url:
         return "Modèle Colab non disponible. Configure COLAB_NGROK_URL dans .env"
 
-    response = requests.post(
-        f"{colab_url}/ia/chat",
-        json={
-            "question": question,
-            "nom_eleve": nom_eleve,
-            "niveau": niveau,
-            "serie": serie,
-            "matiere": matiere,
-            "score": score,
-            "historique": [
-                {"role": m.role, "content": m.content}
-                for m in historique
-            ]
-        },
-        timeout=60
-    )
-    data = response.json()
-    return data.get("reponse", "Erreur modèle")
+    # Construire le message complet pour EduBot
+    message = f"[Élève: {nom_eleve} | Niveau: {niveau} | Matière: {matiere} | Score: {score}/100]\n{question}"
+
+    try:
+        response = requests.post(
+            f"{colab_url}/ia/chat",
+            json={
+                "message": message,
+                "classe": niveau,
+                "matiere": matiere
+            },
+            timeout=120,
+            headers={"ngrok-skip-browser-warning": "true"}
+        )
+        response.raise_for_status()
+        data = response.json()
+        return data.get("response", "Erreur modèle")
+    except requests.exceptions.Timeout:
+        return "EduBot met trop de temps à répondre. Réessaie dans quelques secondes."
+    except Exception as e:
+        return f"Erreur connexion EduBot : {str(e)}"
 
 
 def generer_exercice(
@@ -72,15 +72,27 @@ def generer_exercice(
             "criteres_correction": []
         }
 
-    response = requests.post(
-        f"{colab_url}/ia/exercice",
-        json={
-            "matiere": matiere,
-            "niveau": niveau,
-            "serie": serie,
-            "score": score,
-            "difficulte": difficulte
-        },
-        timeout=60
-    )
-    return response.json()
+    try:
+        response = requests.post(
+            f"{colab_url}/ia/exercice",
+            json={
+                "matiere": matiere,
+                "niveau": niveau,
+                "serie": serie,
+                "score": score,
+                "difficulte": difficulte
+            },
+            timeout=120,
+            headers={"ngrok-skip-browser-warning": "true"}
+        )
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        return {
+            "enonce": f"Erreur : {str(e)}",
+            "correction": "",
+            "difficulte": difficulte,
+            "concepts_cles": [],
+            "bareme": "",
+            "criteres_correction": []
+        }

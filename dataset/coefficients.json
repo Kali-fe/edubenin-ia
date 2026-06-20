@@ -3,37 +3,37 @@
   "note": "Plus le coefficient est élevé, plus la matière est prioritaire pour le dataset",
   "classes": {
     "3eme": {
-      "Anglais": 02,
-      "Histoire-Geographie": 02,
-      "Mathematiques": 03,
-      "PCT": 02,
-      "SVT": 02
+      "Anglais": 2,
+      "Histoire-Geographie": 2,
+      "Mathematiques": 3,
+      "PCT": 2,
+      "SVT": 2
     },
     "Terminale_A": {
-      "Anglais": 03,
-      "Histoire-Geographie": 03,
-      "Mathematiques": 02,
-      "SVT": 02
+      "Anglais": 3,
+      "Histoire-Geographie": 3,
+      "Mathematiques": 2,
+      "SVT": 2
     },
     "Terminale_B": {
-      "Anglais": 02,
-      "Histoire-Geographie": 03,
-      "Mathematiques": 02,
-      "SVT": 02
+      "Anglais": 2,
+      "Histoire-Geographie": 3,
+      "Mathematiques": 2,
+      "SVT": 2
     },
     "Terminale_C": {
-      "Anglais": 02,
-      "Histoire-Geographie": 02,
-      "Mathematiques": 06,
-      "PCT": 05,
-      "SVT": 03
+      "Anglais": 2,
+      "Histoire-Geographie": 2,
+      "Mathematiques": 6,
+      "PCT": 5,
+      "SVT": 3
     },
     "Terminale_D": {
-      "Anglais": 02,
-      "Histoire-Geographie": 02,
-      "Mathematiques": 04,
-      "PCT": 04,
-      "SVT": 05
+      "Anglais": 2,
+      "Histoire-Geographie": 2,
+      "Mathematiques": 4,
+      "PCT": 4,
+      "SVT": 5
     }
   }
 }
